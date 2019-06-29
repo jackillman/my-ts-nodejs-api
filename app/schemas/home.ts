@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import IHome from '../models/home.model';
 
  
 const homeSchema = new mongoose.Schema({
@@ -13,4 +14,4 @@ const homeSchema = new mongoose.Schema({
     return language && language.length === 2;
   }, 'Location code must be 2 characters');
 
-  export  const Home = mongoose.model('home_contents', homeSchema);
+  export  const Home = mongoose.model<IHome>('home_contents', homeSchema);

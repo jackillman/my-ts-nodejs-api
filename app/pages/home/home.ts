@@ -1,5 +1,4 @@
-import  fs  from "fs";
-import path from 'path';
+
 import { Home } from "../../schemas/home"
 import IHome from "../../models/home.model"
 import { ObjectID } from "mongodb";
@@ -10,24 +9,7 @@ export default class HomeRoutes {
     constructor(){
         this.pageName = 'home'
     }
-  
-    // getData = (req:any, res:any, next:any) => {
-    //  //   res.json({pageName: this.pageName});
-    //  let data = this.readJsonFileSync(this.file,this.encoding)
-    //  res.send(data)
-    // }
 
-    // readJsonFileSync(file:any, encoding:any){
-
-    //     if (typeof (encoding) == 'undefined'){
-    //         encoding = 'utf8';
-    //     }
-        
-    //     var filepath:any = path.join(__dirname, '../../'+file);
-    //     // var filepath:any = __dirname + '../' + file;
-    //     var file:any = fs.readFileSync(filepath, encoding);
-    //     return JSON.parse(file);
-    // }
     public getAllDataLangs = (req:any, res:any, next:any) =>{
        
         Home.find({},function (err, item) {
@@ -37,12 +19,10 @@ export default class HomeRoutes {
         })
     }
 
-
     public editDataInDoc:any = (req:any, res:any, next:any) =>{
 
-       let language:any = req.params.lang;
+       let language:string = req.params.lang;
         Home.find({},function (err, items) {
-            console.log(items)
             if (err) return console.error(err);
             items.forEach( (item:any)=> {
                 if(item.language == language) {
@@ -53,7 +33,6 @@ export default class HomeRoutes {
                         description: req.body.description || item.description,
                     };
                     Home.updateOne({language: item.language},updatedItem, function(err:any, affected:any, resp:any) {
-                        console.log(updatedItem);
                         res.send(updatedItem)
                      })
                 }
@@ -65,14 +44,10 @@ export default class HomeRoutes {
 
             let language:string = req.params.newLang;
             Home.find({},function (err, items) {
-                console.log(items)
                 if (err) return console.error(err);
-                let lang = items.filter( (item:any)=> {
-                    if(item.language == language) {
-                        return item
-                    }
-            })
-
+                let lang = items.filter( (item:IHome)=> {
+                     if(item.language == language) return item
+                })
             if(lang.length) {
                 res.send(lang)
             } else {
@@ -85,11 +60,10 @@ export default class HomeRoutes {
            
         })
     }  
+
     public deleteHomeLang = (req:any, res:any, next:any) =>{
 
         let language:string = req.params.delLang;
-   
-        // Home.find({ language:language }).remove().exec();
         Home.remove({ language:language }, (err:any) => {
             if (!err) {
                   //  res.send(it)
@@ -98,5 +72,6 @@ export default class HomeRoutes {
                 res.send(err)
             }
         });
-    }  
+    } 
+
   }
