@@ -46,11 +46,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 let homeRoute = new HomeRoute();
 let aboutRoute = new AboutRoute();
-
-app.get('/api/home', homeRoute.getDataFromMongo);
+// home routes
+app.get('/api/home', homeRoute.getAllDataLangs);
 app.put('/api/home/:lang', homeRoute.editDataInDoc);
 app.post('/api/home/:newLang', homeRoute.createHomeLangContent);
-
+app.delete('/api/home/:delLang', homeRoute.deleteHomeLang);
 
 app.get('/api/about', aboutRoute.getDataFromMongo);
 

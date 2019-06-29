@@ -28,7 +28,7 @@ export default class HomeRoutes {
     //     var file:any = fs.readFileSync(filepath, encoding);
     //     return JSON.parse(file);
     // }
-    public getDataFromMongo = (req:any, res:any, next:any) =>{
+    public getAllDataLangs = (req:any, res:any, next:any) =>{
        
         Home.find({},function (err, item) {
             if (err) return console.error(err);
@@ -85,6 +85,18 @@ export default class HomeRoutes {
            
         })
     }  
+    public deleteHomeLang = (req:any, res:any, next:any) =>{
 
-    
+        let language:string = req.params.delLang;
+   
+        // Home.find({ language:language }).remove().exec();
+        Home.remove({ language:language }, (err:any) => {
+            if (!err) {
+                  //  res.send(it)
+            }
+            else {
+                res.send(err)
+            }
+        });
+    }  
   }
