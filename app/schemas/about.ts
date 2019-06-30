@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import IAbout from '../models/about.model';
 
 const aboutSchema = new mongoose.Schema({
     _id:mongoose.Types.ObjectId,
@@ -23,4 +24,4 @@ const aboutSchema = new mongoose.Schema({
     bot_description4: String
     
 })
-  export const About = mongoose.model('about_contents', aboutSchema);
+  export const About = mongoose.model<IAbout>('about_contents', aboutSchema);
