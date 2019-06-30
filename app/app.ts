@@ -53,6 +53,8 @@ app.post('/api/home/:newLang', homeRoute.createHomeLangContent);
 app.delete('/api/home/:delLang', homeRoute.deleteHomeLang);
 
 app.get('/api/about', aboutRoute.getDataFromMongo);
+app.put('/api/about/:lang', aboutRoute.editDataInDoc);
+
 
 app.use('/api/products', ProductRouter );
 

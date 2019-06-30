@@ -35,6 +35,40 @@ export default class AboutRoutes {
             res.send(item)
         })
     }
+
+    public editDataInDoc:any = (req:any, res:any, next:any) =>{
+
+        let language:string = req.params.lang;
+        let query = req.query;
+
+         About.find({},function (err, items) {
+             if (err) return console.error(err);
+             items.forEach( (item:any)=> {
+                 if(item.language === language) {
+                    let uptobj:any ={}
+                    for(let prop in item) {
+                        for(let queryItem in query) {
+                            if(prop === queryItem) {
+                                if(prop==="language") continue
+                                uptobj[prop]= query[queryItem];
+                            }
+                        }
+                    }
+
+                    About.updateOne({language: language},uptobj, function(err:any, affected:any, resp:any) {
+                        About.find({language: language},function (err, items) {
+                            items.forEach( (el:any)=> {
+                                if(el.language === language ) res.send(el)
+                            })
+                        })
+                        
+                    })
+                 }
+             })
+         })
+     }  
+
+
 }
 
 // module.exports = AboutRoutes;
