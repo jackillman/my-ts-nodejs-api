@@ -10,7 +10,8 @@ const productDetailRoute = new ProductDetailRoute();
 
 // middleware that is specific to this router
 router.use(function timeLog(req:any, res:any, next:any) {
-  console.log('Time: ', Date.now());
+  let date = new Date
+  console.log('Time: ', `${date.getDate()}- ${date.getTime()}`);
   next();
 });
 

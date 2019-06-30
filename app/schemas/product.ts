@@ -5,7 +5,10 @@ import mongoose from 'mongoose';
  
 const productSchema = new mongoose.Schema({
     _id:mongoose.Types.ObjectId,
-    id:Number,
+    id:{
+        type: Number,
+        required:true
+    },
     title_ru:{
         type: String,
         required:true
@@ -22,7 +25,15 @@ const productSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    description:{
+    description_ru:{
+        type: String,
+        required:true
+    },
+    description_ua:{
+        type: String,
+        required:true
+    },
+    description_en:{
         type: String,
         required:true
     },
