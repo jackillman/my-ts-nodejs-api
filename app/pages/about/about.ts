@@ -39,18 +39,18 @@ export default class AboutRoutes {
     public editDataInDoc:any = (req:any, res:any, next:any) =>{
 
         let language:string = req.params.lang;
-        let query = req.query;
-
+        // let query = req.query;
+        let body = req.body;
          About.find({},function (err, items) {
              if (err) return console.error(err);
              items.forEach( (item:any)=> {
                  if(item.language === language) {
                     let uptobj:any ={}
                     for(let prop in item) {
-                        for(let queryItem in query) {
-                            if(prop === queryItem) {
+                        for(let bodyItem in body) {
+                            if(prop === bodyItem) {
                                 if(prop==="language") continue
-                                uptobj[prop]= query[queryItem];
+                                uptobj[prop]= body[bodyItem];
                             }
                         }
                     }
