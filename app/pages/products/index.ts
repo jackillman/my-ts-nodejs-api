@@ -15,7 +15,8 @@ router.use(function timeLog(req:any, res:any, next:any) {
 });
 
 router.get('/', productsRoute.getDataFromMongo);
-router.get('/:name', productDetailRoute.getDataFromMongo);
-router.put('/:name', productDetailRoute.updateProductDataInMongo);
-
+router.post('/',productsRoute.createProduct)
+router.get('/:id', productDetailRoute.getProductFromDB);
+router.put('/:id', productDetailRoute.updateProduct);
+router.delete('/:id', productDetailRoute.deleteProduct);
 export default router;

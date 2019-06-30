@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import AboutRoute  from './pages/about/about';
 import HomeRoute  from './pages/home/home';
 
-import ProductRouter from "./pages/product/index"
+import ProductRouter from "./pages/products/index"
 import birds from './birds';
 import bodyParser  from 'body-parser'
 // const MongoClient = require("mongodb").MongoClient;
@@ -46,6 +46,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 let homeRoute = new HomeRoute();
 let aboutRoute = new AboutRoute();
+
 // home routes
 app.get('/api/home', homeRoute.getAllDataLangs);
 app.put('/api/home/:lang', homeRoute.editDataInDoc);
